@@ -1,0 +1,56 @@
+{% extends 'partials/base.html'%}
+{% block title %}Medicine Page{% endblock %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+{% include 'partials/topnav.html' %}
+
+<!--Table-->
+<div class="container">
+    <div class="row my-4">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+            <table class="table bg-white">
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <th scope="col">Patient</th>
+                        <th scope="col">Patient's Category</th>
+                        <th scope="col">Medicines</th>
+                        <th scope="col">Medicine Category</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Issue by</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for medicine in medicines %}
+                    <tr>
+                        <td>{{medicine.patient}}</td>
+                        <td>{{medicine.patient.category}}</td>
+                        <td>{{medicine.medicine_name}}</td>
+                        <td>{{medicine.medicine_category}}</td>
+                        <td>{{medicine.medicine_quantity}}</td>
+                        <td>{{medicine.staff}}</td>
+                        <td>{{medicine.date}}</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="{% url 'dashboard-medicine-update' medicine.id %}">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'dashboard-medicine-delete' medicine.id %}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--End Table-->
+
+{% endblock %}
